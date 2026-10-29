@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Vercel
+.vercel
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+*.pyc
+__pycache__/
+
+# Large ML runtime binaries (install via npm/CDN)
+client/public/mediapipe/
+client/public/onnxruntime/
