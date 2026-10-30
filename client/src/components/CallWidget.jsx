@@ -240,14 +240,14 @@ const CallWidget = ({ isOpen, onClose }) => {
                                 <div className="w-full flex flex-col items-center gap-3">
                                     <div className="w-full relative flex items-center justify-center">
                                         <input
-                                            type="text"
+                                            type="tel"
                                             value={phoneNumber}
-                                            onChange={(e) => setPhoneNumber(e.target.value)}
-                                            placeholder="Enter number..."
-                                            className="text-2xl font-semibold text-center bg-transparent border-none outline-none w-full placeholder:text-gray-300 text-gray-800 tracking-wider"
+                                            onChange={(e) => setPhoneNumber(e.target.value.replace(/[^0-9+*#]/g, ''))}
+                                            placeholder="Enter phone number..."
+                                            className="text-2xl font-semibold text-center bg-transparent border-none outline-none w-full placeholder:text-gray-300 text-gray-800 tracking-wider font-mono"
                                         />
                                         {phoneNumber && (
-                                            <button onClick={handleBackspace} className="absolute right-0 text-gray-300 hover:text-gray-500 p-1">
+                                            <button onClick={handleBackspace} title="Delete last digit" className="absolute right-0 text-gray-400 hover:text-gray-600 p-1.5 rounded-full hover:bg-gray-100 transition-colors">
                                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" /></svg>
                                             </button>
                                         )}
