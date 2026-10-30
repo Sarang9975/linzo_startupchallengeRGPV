@@ -25,6 +25,7 @@ const ControlBar = ({
     layoutMode, setLayoutMode,
 }) => {
     const [showTray, setShowTray] = useState(false);
+    const [isCopied, setIsCopied] = useState(false);
 
     /* ── Reusable icon-button components ── */
     const IconBtn = ({ onClick, active, danger, title, children, className = '' }) => (
@@ -103,12 +104,24 @@ const ControlBar = ({
                     <div className="hidden sm:flex items-center gap-1.5 flex-shrink-0">
                         {/* Invite */}
                         <IconBtn
-                            title="Copy Invite Link"
-                            onClick={() => { const url = window.location.href; navigator.clipboard.writeText(url); }}
+                            title={isCopied ? "Link Copied!" : "Copy Invite Link"}
+                            active={isCopied}
+                            onClick={() => {
+                                const url = window.location.href;
+                                navigator.clipboard.writeText(url);
+                                setIsCopied(true);
+                                setTimeout(() => setIsCopied(false), 2000);
+                            }}
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                            </svg>
+                            {isCopied ? (
+                                <svg className="w-5 h-5 text-emerald-500 animate-in zoom-in duration-150" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                </svg>
+                            )}
                         </IconBtn>
                         {/* ISL Finger Spelling */}
                         <IconBtn
