@@ -28,7 +28,9 @@ const SignLanguagePanel = ({
             <div className="absolute z-20 top-4 left-4">
                 <button
                     onClick={() => setShowAvatar(!showAvatar)}
-                    className={`px-5 py-2.5 rounded-full text-sm font-bold shadow-sm transition-all flex items-center gap-2 transform hover:scale-105 active:scale-95 ${showAvatar ? 'bg-[#684CFE] text-white hover:bg-indigo-700' : 'bg-white text-[#684CFE] ring-1 ring-indigo-100 hover:bg-indigo-50'}`}
+                    aria-label={showAvatar ? 'Hide sign language avatar' : 'Show sign language avatar'}
+                    aria-expanded={showAvatar}
+                    className={`px-5 py-2.5 rounded-full text-sm font-bold shadow-sm transition-all flex items-center gap-2 transform hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#684CFE]/70 focus-visible:ring-offset-2 ${showAvatar ? 'bg-[#684CFE] text-white hover:bg-indigo-700' : 'bg-white text-[#684CFE] ring-1 ring-indigo-100 hover:bg-indigo-50'}`}
                 >
                     {showAvatar ? '🤟 Hide Sign Avatar' : '🤟 See in Signs'}
                 </button>
