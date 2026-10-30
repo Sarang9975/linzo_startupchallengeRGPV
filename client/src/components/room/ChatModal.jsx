@@ -76,22 +76,25 @@ const ChatModal = ({
                         </div>
                     </div>
 
-                    <div className="flex gap-2">
-                        <input
-                            type="text"
-                            value={chatInput}
-                            onChange={(e) => setChatInput(e.target.value)}
-                            onKeyPress={(e) => e.key === 'Enter' && sendChatMessage()}
-                            placeholder="Type your message..."
-                            className="flex-1 border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
-                        />
-                        <button
-                            onClick={sendChatMessage}
-                            disabled={!chatInput.trim()}
-                            className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            Send
-                        </button>
+                    <div className="flex flex-col gap-1.5">
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                value={chatInput}
+                                onChange={(e) => setChatInput(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && sendChatMessage()}
+                                placeholder="Type your message..."
+                                className="flex-1 border border-gray-300 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#684CFE] focus:border-[#684CFE] transition-all duration-200"
+                            />
+                            <button
+                                onClick={sendChatMessage}
+                                disabled={!chatInput.trim()}
+                                className="bg-[#684CFE] hover:bg-indigo-700 active:scale-95 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Send
+                            </button>
+                        </div>
+                        <span className="text-[11px] text-gray-400 px-1 font-medium">Press <kbd className="px-1 py-0.5 text-[10px] bg-gray-100 rounded border border-gray-200 text-gray-600 font-mono">Enter</kbd> to send</span>
                     </div>
                 </div>
             </div>
