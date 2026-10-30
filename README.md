@@ -2246,17 +2246,15 @@ Every major component exposes standardized interfaces, enabling SDKs, browser ex
 
 ---
 
-# 🧪 Validation
+# 🧪 Prototype Testing & Evaluation
 
-The development of Linzo has been continuously refined through user engagement and iterative feedback.
+Linzo Meet was designed, prototyped, and evaluated as an accessible communication prototype:
 
-### Community Engagement
+### User Experience Testing
 
-- Pilot evaluation conducted with **40 Deaf and Hard-of-Hearing students**, where **38 participants found Linzo helpful and transformative**.
-- User research and feedback sessions across **10+ organizations**, including schools, NGOs, and corporate stakeholders in Nagpur, India.
-- Continuous accessibility validation with educators, accessibility advocates, and communication professionals.
-
-These insights have directly influenced the platform's accessibility workflows, communication modalities, and AI-assisted interaction design.
+- **Assistive Workflow Testing**: Validated real-time speech-to-sign, sign-to-voice, and live translation flows across varied browser & network constraints.
+- **Multimodal Synchronization**: Tested semantic engine event pipeline latency ensuring sub-second transcription and gesture-to-speech feedback.
+- **Iterative Feedback**: Accessibility workflows and UI interactions refined based on testing with peers and accessibility guidelines (WCAG 2.1 principles).
 
 ---
 
@@ -2324,7 +2322,7 @@ This project is licensed under the **MIT License**.
 
 # ❤️ Communication Should Never Decide Who Gets an Opportunity.
 
-### Building the World's First AI-Powered Multimodal Communication Infrastructure.
+### AI-Powered Multimodal Communication Prototype
 
 **One Conversation. Every Modality. Every Participant.**
 
