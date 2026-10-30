@@ -1,0 +1,558 @@
+/* ── Page shell ─────────────────────────────────────────────── */
+.linzomeet-page {
+  --linzo-primary: #684cfe;
+  --linzo-primary-dark: #5338d4;
+  --linzo-emerald: #10b981;
+  --linzo-purple: #8b5cf6;
+  position: relative;
+  min-height: 100dvh;
+  background: #f7f6fc;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  isolation: isolate;
+}
+
+/* ── Animated background layers (no mix-blend) ─────────────── */
+.linzomeet-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.linzomeet-mesh {
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 10%, rgba(104, 76, 254, 0.22), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 15%, rgba(139, 92, 246, 0.18), transparent 50%),
+    radial-gradient(ellipse 45% 50% at 70% 75%, rgba(79, 70, 229, 0.14), transparent 55%),
+    radial-gradient(ellipse 40% 35% at 10% 80%, rgba(16, 185, 129, 0.1), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(104, 76, 254, 0.08), transparent 60%);
+  animation: linzomeet-mesh-drift 22s ease-in-out infinite alternate;
+}
+
+@keyframes linzomeet-mesh-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(2%, -1.5%) scale(1.03); }
+  66% { transform: translate(-1.5%, 2%) scale(0.98); }
+  100% { transform: translate(1%, 1%) scale(1.02); }
+}
+
+.linzomeet-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform;
+}
+
+.linzomeet-orb-1 {
+  width: 280px;
+  height: 280px;
+  top: -60px;
+  left: -40px;
+  background: rgba(104, 76, 254, 0.35);
+  animation: linzomeet-float-1 16s ease-in-out infinite;
+}
+
+.linzomeet-orb-2 {
+  width: 220px;
+  height: 220px;
+  top: 30%;
+  right: -50px;
+  background: rgba(139, 92, 246, 0.28);
+  animation: linzomeet-float-2 20s ease-in-out infinite;
+}
+
+.linzomeet-orb-3 {
+  width: 200px;
+  height: 200px;
+  bottom: 10%;
+  left: 20%;
+  background: rgba(16, 185, 129, 0.2);
+  animation: linzomeet-float-3 18s ease-in-out infinite;
+}
+
+@keyframes linzomeet-float-1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 40px); }
+}
+
+@keyframes linzomeet-float-2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-35px, 25px); }
+}
+
+@keyframes linzomeet-float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(25px, -30px); }
+}
+
+.linzomeet-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(104, 76, 254, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104, 76, 254, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 10%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 10%, transparent 75%);
+}
+
+.linzomeet-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.linzomeet-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Typography & badges ────────────────────────────────────── */
+.linzomeet-gradient-text {
+  background: linear-gradient(135deg, #684cfe 0%, #8b5cf6 35%, #6366f1 65%, #684cfe 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: linzomeet-gradient-shift 5s linear infinite;
+}
+
+@keyframes linzomeet-gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.linzomeet-badge {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(104, 76, 254, 0.18);
+  box-shadow: 0 4px 20px rgba(104, 76, 254, 0.08);
+}
+
+.linzomeet-pill {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(104, 76, 254, 0.12);
+  animation: linzomeet-pill-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.linzomeet-pill:nth-child(1) { animation-delay: 0.15s; }
+.linzomeet-pill:nth-child(2) { animation-delay: 0.22s; }
+.linzomeet-pill:nth-child(3) { animation-delay: 0.29s; }
+
+@keyframes linzomeet-pill-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Entrance & scroll reveal ─────────────────────────────── */
+@keyframes linzomeet-enter {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.linzomeet-enter {
+  opacity: 0;
+  animation: linzomeet-enter 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.linzomeet-enter-d1 { animation-delay: 0.06s; }
+.linzomeet-enter-d2 { animation-delay: 0.14s; }
+.linzomeet-enter-d3 { animation-delay: 0.22s; }
+.linzomeet-enter-d4 { animation-delay: 0.32s; }
+.linzomeet-enter-d5 { animation-delay: 0.42s; }
+
+.linzomeet-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.linzomeet-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.linzomeet-reveal-delay-1 { transition-delay: 0.08s; }
+.linzomeet-reveal-delay-2 { transition-delay: 0.16s; }
+.linzomeet-reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ── Stats card — glass + shimmer border ────────────────────── */
+.linzomeet-surface {
+  position: relative;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(104, 76, 254, 0.06),
+    0 8px 40px -12px rgba(104, 76, 254, 0.18),
+    0 2px 8px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+}
+
+.linzomeet-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(104, 76, 254, 0.35),
+    rgba(139, 92, 246, 0.15),
+    rgba(16, 185, 129, 0.2),
+    rgba(104, 76, 254, 0.35)
+  );
+  background-size: 300% 300%;
+  animation: linzomeet-border-shimmer 6s ease infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes linzomeet-border-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.linzomeet-surface-glow {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(104, 76, 254, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.linzomeet-stat-chip {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(104, 76, 254, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: linzomeet-chip-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.linzomeet-stat-chip:nth-child(1) { animation-delay: 0.35s; }
+.linzomeet-stat-chip:nth-child(2) { animation-delay: 0.45s; }
+.linzomeet-stat-chip:nth-child(3) { animation-delay: 0.55s; }
+
+@keyframes linzomeet-chip-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (hover: hover) {
+  .linzomeet-stat-chip:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(104, 76, 254, 0.12);
+  }
+}
+
+.linzomeet-stat-number {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.linzomeet-stat-number.bump {
+  transform: scale(1.08);
+}
+
+.linzomeet-bar-track {
+  background: rgba(104, 76, 254, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.linzomeet-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 12px rgba(104, 76, 254, 0.25);
+}
+
+.linzomeet-skeleton {
+  background: linear-gradient(90deg, #eceaf5 25%, #f8f7fc 50%, #eceaf5 75%);
+  background-size: 200% 100%;
+  animation: linzomeet-skeleton 1.4s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes linzomeet-skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Action cards ───────────────────────────────────────────── */
+.linzomeet-action-card {
+  position: relative;
+  min-height: 3.25rem;
+  overflow: hidden;
+  transition:
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.32s ease,
+    border-color 0.32s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.linzomeet-action-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.35) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .linzomeet-action-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 40px -12px rgba(104, 76, 254, 0.22),
+      0 8px 16px -8px rgba(15, 23, 42, 0.08);
+  }
+
+  .linzomeet-action-card:hover::after {
+    transform: translateX(120%);
+  }
+
+  .linzomeet-action-card:hover .linzomeet-action-icon {
+    transform: scale(1.1) rotate(-3deg);
+  }
+}
+
+.linzomeet-action-card:active {
+  transform: scale(0.98);
+  transition-duration: 0.1s;
+}
+
+.linzomeet-action-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.linzomeet-action-primary {
+  background: linear-gradient(135deg, #684cfe 0%, #5a3de8 40%, #6366f1 70%, #684cfe 100%);
+  background-size: 200% 200%;
+  animation: linzomeet-btn-gradient 4s ease infinite;
+  box-shadow:
+    0 8px 32px -4px rgba(104, 76, 254, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+@keyframes linzomeet-btn-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.linzomeet-action-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(104, 76, 254, 0.12);
+}
+
+.linzomeet-action-outline {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(104, 76, 254, 0.2);
+}
+
+/* ── Count pop & live dot ───────────────────────────────────── */
+@keyframes linzomeet-count-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+
+.linzomeet-count-pop {
+  animation: linzomeet-count-pop 0.5s ease-out;
+}
+
+@keyframes linzomeet-live-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  50% { opacity: 0.85; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+}
+
+.linzomeet-live-dot {
+  animation: linzomeet-live-pulse 2.2s ease-in-out infinite;
+}
+
+/* ── Modal ──────────────────────────────────────────────────── */
+@keyframes linzomeet-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes linzomeet-sheet-up {
+  from { opacity: 0; transform: translateY(100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes linzomeet-modal-up {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.linzomeet-modal-backdrop {
+  animation: linzomeet-fade-in 0.25s ease-out forwards;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.linzomeet-modal-panel {
+  animation: linzomeet-sheet-up 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 -8px 40px rgba(104, 76, 254, 0.15);
+}
+
+@media (min-width: 640px) {
+  .linzomeet-modal-panel {
+    animation: linzomeet-modal-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 24px 64px rgba(104, 76, 254, 0.18);
+  }
+}
+
+.linzomeet-success-icon {
+  animation: linzomeet-success-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes linzomeet-success-pop {
+  0% { opacity: 0; transform: scale(0.4) rotate(-10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* ── Form ───────────────────────────────────────────────────── */
+.linzomeet-profile-pill label {
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  min-height: 3.5rem;
+}
+
+.linzomeet-profile-pill label:active {
+  transform: scale(0.99);
+}
+
+.linzomeet-profile-pill input:checked + label {
+  border-color: var(--linzo-primary);
+  background: rgba(104, 76, 254, 0.06);
+  box-shadow: 0 0 0 3px rgba(104, 76, 254, 0.1);
+}
+
+.linzomeet-profile-radio {
+  flex-shrink: 0;
+}
+
+.linzomeet-input {
+  font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.linzomeet-input:focus {
+  box-shadow: 0 0 0 4px rgba(104, 76, 254, 0.12);
+}
+
+@media (min-width: 640px) {
+  .linzomeet-input { font-size: 0.9375rem; }
+}
+
+.linzomeet-cta-btn {
+  min-height: 3rem;
+  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.linzomeet-cta-btn:not(:disabled):hover {
+  box-shadow: 0 8px 24px rgba(104, 76, 254, 0.35);
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .linzomeet-mesh,
+  .linzomeet-orb,
+  .linzomeet-gradient-text,
+  .linzomeet-action-primary,
+  .linzomeet-surface::before,
+  .linzomeet-live-dot,
+  .linzomeet-pill,
+  .linzomeet-stat-chip {
+    animation: none !important;
+  }
+
+  .linzomeet-enter,
+  .linzomeet-reveal,
+  .linzomeet-modal-backdrop,
+  .linzomeet-modal-panel,
+  .linzomeet-success-icon,
+  .linzomeet-stat-number.bump,
+  .linzomeet-count-pop {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Google Pay style success tick animation ────────────────── */
+@keyframes gpay-circle-bounce {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.1); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gpay-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes gpay-ripple {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.gpay-circle {
+  animation: gpay-circle-bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.gpay-check {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: gpay-check-draw 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.55s forwards;
+}
+
+.gpay-ripple-1 {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid #10b981;
+  opacity: 0;
+  animation: gpay-ripple 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+.gpay-ripple-2 {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid #10b981;
+  opacity: 0;
+  animation: gpay-ripple 1.6s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  animation-delay: 0.8s;
+  pointer-events: none;
+}
+
